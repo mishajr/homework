@@ -124,15 +124,15 @@
 # Завдання 4
 
 # =======================================================================================================
-num1 = int(input("Введіть перше число :"))
-num2 = int(input("Введіть друге число :"))
+# num1 = int(input("Введіть перше число :"))
+# num2 = int(input("Введіть друге число :"))
 
-if num1 == num2:
-    print("Ці числа є рівними")
-else:
-    maxMinNum = [num1,num2]
-    print(max(maxMinNum))
-    print(min(maxMinNum))
+# if num1 == num2:
+#     print("Ці числа є рівними")
+# else:
+#     maxMinNum = [num1,num2]
+#     print(max(maxMinNum))
+#     print(min(maxMinNum))
 
 
 
