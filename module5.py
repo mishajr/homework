@@ -17,7 +17,7 @@
 # count1 = 0
 # str2 = ""
 # for i in range(len(splitsText)):
-#     if splitsText[i] in m:
+#     if splitsText[i].lower() in m:
 #         splitsText[i] = splitsText[i].upper()
         
         
