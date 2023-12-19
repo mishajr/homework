@@ -82,10 +82,13 @@
 # list3 = list1 + list2
 # print(list3)
 
+# list45 = list1 + list2
+# print(list(set(list45)))
 
-
-# list4 = list(set(list1 + list2))
-# print(list4)
+setList1 = list(set(list1))
+setList2 = list(set(list2))
+listSum = setList1 + setList2
+print(listSum)
 
 
 # list5 =[i for i in list1 if i in list2]
