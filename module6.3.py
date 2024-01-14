@@ -109,64 +109,70 @@
 # import random
 
 # def print_board(board):
-
 #     for row in board:
 #         print(" ".join(map(str, row)))
-#     print("\n")
 
-# def find_blank(board):
+# def is_solvable(board):
+#     inversions = 0
+#     flatten_board = [num for row in board for num in row if num != 0]
+    
+#     for i in range(len(flatten_board) - 1):
+#         for j in range(i + 1, len(flatten_board)):
+#             if flatten_board[i] > flatten_board[j]:
+#                 inversions += 1
 
-#     for i in range(len(board)):
-#         for j in range(len(board[i])):
-#             if board[i][j] == 0:
+#     return inversions % 2 == 0
+
+# def get_empty_position(board):
+#     for i, row in enumerate(board):
+#         for j, num in enumerate(row):
+#             if num == 0:
 #                 return i, j
-#     return -1, -1
 
-# def is_valid_move(board, row, col):
+# def shuffle_board():
+#     numbers = list(range(1, 16))
+#     random.shuffle(numbers)
 
-#     blank_row, blank_col = find_blank(board)
-#     return (row == blank_row and abs(col - blank_col) == 1) or (col == blank_col and abs(row - blank_row) == 1)
+#     board = [numbers[i:i+4] for i in range(0, 16, 4)]
+    
+#     if not is_solvable(board):
 
-# def shuffle_board(board, moves=100):
+#         return shuffle_board()
 
-#     for _ in range(moves):
-#         blank_row, blank_col = find_blank(board)
-#         possible_moves = []
-#         if blank_row > 0:
-#             possible_moves.append((blank_row - 1, blank_col))
-#         if blank_row < len(board) - 1:
-#             possible_moves.append((blank_row + 1, blank_col))
-#         if blank_col > 0:
-#             possible_moves.append((blank_row, blank_col - 1))
-#         if blank_col < len(board[0]) - 1:
-#             possible_moves.append((blank_row, blank_col + 1))
-#         move_row, move_col = random.choice(possible_moves)
-#         board[blank_row][blank_col], board[move_row][move_col] = board[move_row][move_col], board[blank_row][blank_col]
+#     return board
 
-# def fifteen_game():
+# def move(board, direction):
+#     empty_i, empty_j = get_empty_position(board)
 
-#     board = [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11], [12, 13, 14, 15]]
-#     shuffle_board(board)
+#     if direction == "up" and empty_i > 0:
+#         board[empty_i][empty_j], board[empty_i - 1][empty_j] = board[empty_i - 1][empty_j], board[empty_i][empty_j]
+#     elif direction == "down" and empty_i < 3:
+#         board[empty_i][empty_j], board[empty_i + 1][empty_j] = board[empty_i + 1][empty_j], board[empty_i][empty_j]
+#     elif direction == "left" and empty_j > 0:
+#         board[empty_i][empty_j], board[empty_i][empty_j - 1] = board[empty_i][empty_j - 1], board[empty_i][empty_j]
+#     elif direction == "right" and empty_j < 3:
+#         board[empty_i][empty_j], board[empty_i][empty_j + 1] = board[empty_i][empty_j + 1], board[empty_i][empty_j]
 
-#     while not is_game_over(board):
+# def is_solved(board):
+#     return all(board[i][j] == i * 4 + j + 1 for i in range(4) for j in range(4)) and board[3][3] == 0
+
+# def main():
+#     board = shuffle_board()
+
+#     while True:
 #         print_board(board)
-#         row, col = map(int, input("Введіть рядок та стовпчик числа, яке хочете змістити (через пробіл): ").split())
-#         if is_valid_move(board, row, col):
-#             blank_row, blank_col = find_blank(board)
-#             board[blank_row][blank_col], board[row][col] = board[row][col], board[blank_row][blank_col]
-#         else:
-#             print("Недопустимий хід! Спробуйте ще раз.")
 
-#     print("Ви перемогли! Гра завершена.")
+#         if is_solved(board):
+#             print("Щиро вітаю! Ви розгадали головоломку.")
+#             break
 
-# def is_game_over(board):
+#         direction = input("Введіть напрямок (up, down, left, right), щоб перемістити порожнє місце, або quit, щоб вийти: ")
 
-#     num = 1
-#     for i in range(len(board)):
-#         for j in range(len(board[i])):
-#             if board[i][j] != num % 16:
-#                 return False
-#             num += 1
-#     return True
+#         if direction == 'quit':
+#             print("Вихід з гри.")
+#             break
 
-# fifteen_game()
+#         move(board, direction)
+
+# if __name__ == "__main__":
+#     main()
