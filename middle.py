@@ -34,6 +34,7 @@ for color_name, hex_code in favorite_colors.items():
     color_name_entry = Entry(color_frame, width=20)
     color_name_entry.pack(side=LEFT)
 
+
  
     color_button = Button(color_frame, text=color_name, bg=hex_code, width=20,command=lambda c=color_name, h=hex_code, c_entry=color_name_entry, h_entry=hex_code_entry: show_color(c, h, c_entry, h_entry))
     color_button.pack(side=LEFT)
