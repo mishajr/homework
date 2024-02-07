@@ -75,10 +75,10 @@ def login_form():
         with open("login.txt", "rb") as f:
             a = pickle.load(f)
         
-            if enter_login.get() in a and enter_password.get() == a[enter_login.get()]:
-                messagebox.showinfo("Welcome", "You are logged in")
-            else:
-                messagebox.showerror("Error", "Login or password is incorrect")
+        if enter_login.get() in a and enter_password.get() == a[enter_login.get()]:
+            messagebox.showinfo("Welcome", "You are logged in")
+        else:
+            messagebox.showerror("Error", "Login or password is incorrect")
 
 
 
